@@ -66,6 +66,19 @@ CKEDITOR.editorConfig = function( config ) {
 		'undo,' +
 		'wysiwygarea';
 	// %REMOVE_END%
+
+  // Haiku custom stuff
+  config.customConfig = CKEDITOR.basePath + '../ckeditor_haiku/ckeditor_haiku_config.js';
+  try {
+    config.customConfig += CKEDITOR_VERSION_EXTENSION;
+  } catch(err) {
+    if(typeof errlog == 'function') {
+      errlog(err);
+    } else {
+      throw(err);
+    }
+  }
+
 };
 
 // %LEAVE_UNMINIFIED% %REMOVE_LINE%
