@@ -39,6 +39,8 @@ as follows:
 Comments in this file will give more details about each of the above blocks.
 */
 
+@import url("dialog.haiku.table.css");
+
 /* The outer container of the dialog. */
 .cke_dialog
 {

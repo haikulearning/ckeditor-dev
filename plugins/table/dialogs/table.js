@@ -123,6 +123,33 @@
 				// they get reflected into the Advanced tab.
 				widthInput && widthInput.onChange();
 				heightInput && heightInput.onChange();
+
+				/*HAIKU EDIT - hide advanced tab and other fields and add css classes to some elements*/
+				this.hidePage('advanced');
+				this.getContentElement('info', 'txtSummary').getElement().getParent().hide();
+				this.getContentElement('info', 'selHeaders').getElement().getParent().hide();
+
+				//Rename Caption field and move it to the top
+				this.getContentElement('info', 'txtCaption').getElement().getChild(0).setText("Title of Table");
+				var tableTitleRow = this.getContentElement('info', 'txtCaption').getElement().getParent().getParent().getParent().getParent().getParent().getParent().getParent(), tableTitleParent = tableTitleRow.getParent();
+				tableTitleRow.move(tableTitleParent, true);
+				//move as first child
+
+				//add class for css code in dialog.css
+				this.getElement('info').addClass('cke_table_dialog');
+
+				/* add class for border bottom on last two fields */
+				this.getContentElement('info', 'cmbAlign').getElement().getParent().addClass('cke_table_dialog_td_last');
+				this.getContentElement('info', 'txtCellPad').getElement().getParent().addClass('cke_table_dialog_td_last');
+
+				//Add class for horizontal space between the two blocks of fields
+				this.getContentElement('info', 'divider1').getElement().getParent().addClass('cke_table_dialog_dividers');
+				this.getContentElement('info', 'divider2').getElement().getParent().addClass('cke_table_dialog_dividers');
+
+				//Add class to remove padding so horizontal border lines connect
+				this.getContentElement('info', 'txtRows').getElement().getParent().getParent().getParent().getParent().getParent().getParent().addClass('no_right_padding');
+				/*end HAIKU EDIT */
+
 			},
 			onOk: function() {
 				var selection = editor.getSelection(),
@@ -285,6 +312,7 @@
 						},
 							{
 							type: 'html',
+							id : 'divider1', /* HAIKU EDIT (need id to be able to access) */
 							html: '&nbsp;'
 						},
 							{
@@ -425,6 +453,7 @@
 						},
 							{
 							type: 'html',
+							id : 'divider2', /* HAIKU EDIT (need id to be able to access) */
 							html: '&nbsp;'
 						},
 							{

@@ -1,0 +1,34 @@
+/*Table dialog tweaks */
+
+/* Remove padding between two columns of fields */
+.cke_table_dialog .no_right_padding {
+  padding-right: 0px !important;
+}
+
+.cke_table_dialog .cke_dialog_ui_hbox_first .cke_dialog_ui_vbox,
+  .cke_table_dialog .cke_dialog_ui_hbox_last .cke_dialog_ui_vbox {
+  border-top: 1px solid #CCDDBB;
+}
+
+.cke_table_dialog .cke_dialog_ui_hbox_first .cke_dialog_ui_vbox_child {
+  border-left: 1px solid #CCDDBB;
+}
+
+.cke_table_dialog .cke_dialog_ui_hbox_last .cke_dialog_ui_vbox_child {
+  border-right: 1px solid #CCDDBB;
+}
+
+.cke_table_dialog .cke_dialog_ui_vbox_child {
+  padding: 4px 10px 10px !important;
+}
+
+.cke_table_dialog .cke_table_dialog_dividers {
+  padding: 0px !important;
+  border-width: 1px 0 1px 0 !important;
+  border-style : solid;
+  border-color : #CCDDBB;
+}
+
+.cke_table_dialog .cke_table_dialog_td_last {
+  border-bottom: 1px solid #CCDDBB;
+}
