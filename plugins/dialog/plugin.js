@@ -118,7 +118,7 @@ CKEDITOR.DIALOG_RESIZE_BOTH = 3;
 		input && input.removeAttribute( 'aria-invalid' );
 	}
 
-	var templateSource = '<div class="cke_reset_all {editorId} {editorDialogClass} {hidpi}' +
+	var templateSource = '<div class="{editorId} {editorDialogClass} {hidpi}' +
 		'" dir="{langDir}"' +
 		' lang="{langCode}"' +
 		' role="dialog"' +
