@@ -64,7 +64,8 @@ CKEDITOR.editorConfig = function( config ) {
 		'templates,' +
 		'toolbar,' +
 		'undo,' +
-		'wysiwygarea';
+		'wysiwygarea,' +
+		'wsc';
 	// %REMOVE_END%
 
   // Haiku custom stuff
