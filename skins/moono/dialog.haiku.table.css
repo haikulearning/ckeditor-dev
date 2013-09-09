@@ -32,3 +32,16 @@
 .cke_table_dialog .cke_table_dialog_td_last {
   border-bottom: 1px solid #CCDDBB;
 }
+
+.cke_table_dialog table {
+  border-collapse : collapse;
+}
+
+.cke_table_dialog table td {
+  padding: 0;
+}
+
+
+.cke_table_dialog select.cke_dialog_ui_input_select {
+  height: 31px;
+}

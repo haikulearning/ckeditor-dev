@@ -39,9 +39,14 @@ as follows:
 Comments in this file will give more details about each of the above blocks.
 */
 
-/* We try to have as little as possible Haiku css here by using @import.
- * However, there are a couple of changes in this file.
- * You can search for those by using the keyword "HAIKU EDIT". */
+/*
+HAIKU STYLING
+=============
+
+We try to have as little as possible Haiku css here by using css import.
+However, there are a couple of changes in this file.
+You can search for those by using the keyword "HAIKU EDIT".
+*/
 @import url("dialog.haiku.css");
 @import url("dialog.haiku.table.css");
 

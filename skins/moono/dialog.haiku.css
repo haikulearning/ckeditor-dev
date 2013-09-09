@@ -2,31 +2,6 @@
   padding: 0 !important;
 }
 
-.cke_dialog_contents a {
-  color:#E07D20 !important;
-  cursor:pointer !important;
-  /*font-size: 1em !important;*/
-}
-
-.cke_dialog_contents a.sbutton {
-    -moz-border-radius-bottomleft:3px !important !important;
-    -moz-border-radius-bottomright:3px !important !important;
-    -moz-border-radius-topleft:3px !important !important;
-    -moz-border-radius-topright:3px !important !important;
-    background-color:#ECECEC !important !important;
-    border:1px solid #B3B3B3 !important !important;
-    color:#000000 !important !important;
-    cursor:pointer !important !important;
-    font-weight:normal !important !important;
-    margin-right:5px !important !important;
-    padding:2px 4px !important !important;
-    text-decoration:none !important !important;
-    white-space:nowrap !important !important;
-    margin-left: 5px !important;
-}
-
-
-
 a.cke_dialog_ui_button:focus,
 a.cke_dialog_ui_button:active
 {
