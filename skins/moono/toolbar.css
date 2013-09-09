@@ -49,6 +49,14 @@ Special outer level classes used in this file:
 	.cke_rtl: Available when the editor UI is on RTL.
 */
 
+/*
+HAIKU STYLING
+=============
+
+We try to have as little as possible Haiku css here by using css import.
+*/
+@import url("toolbar.haiku.css");
+
 /* The box that holds each toolbar. */
 .cke_toolbar
 {
