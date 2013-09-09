@@ -39,6 +39,10 @@ as follows:
 Comments in this file will give more details about each of the above blocks.
 */
 
+/* We try to have as little as possible Haiku css here by using @import.
+ * However, there are a couple of changes in this file.
+ * You can search for those by using the keyword "HAIKU EDIT". */
+@import url("dialog.haiku.css");
 @import url("dialog.haiku.table.css");
 
 /* The outer container of the dialog. */
@@ -623,6 +627,8 @@ a.cke_dialog_ui_button:hover
 }
 
 /* 	:focus/:active styles for dialog buttons: regular and footer. */
+/* HAIKU EDIT START */
+/*
 a.cke_dialog_ui_button:focus,
 a.cke_dialog_ui_button:active
 {
@@ -632,6 +638,8 @@ a.cke_dialog_ui_button:active
 	-webkit-box-shadow: 0 0 6px rgba(0,0,0,.4) inset;
 	box-shadow: 0 0 6px rgba(0,0,0,.4) inset;
 }
+*/
+/*HAIKU EDIT END */
 
 .cke_hc a.cke_dialog_ui_button:hover,
 .cke_hc a.cke_dialog_ui_button:focus,

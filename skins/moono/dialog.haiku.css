@@ -1,0 +1,153 @@
+.cke_dialog_contents {
+  padding: 0 !important;
+}
+
+.cke_dialog_contents a {
+  color:#E07D20 !important;
+  cursor:pointer !important;
+  /*font-size: 1em !important;*/
+}
+
+.cke_dialog_contents a.sbutton {
+    -moz-border-radius-bottomleft:3px !important !important;
+    -moz-border-radius-bottomright:3px !important !important;
+    -moz-border-radius-topleft:3px !important !important;
+    -moz-border-radius-topright:3px !important !important;
+    background-color:#ECECEC !important !important;
+    border:1px solid #B3B3B3 !important !important;
+    color:#000000 !important !important;
+    cursor:pointer !important !important;
+    font-weight:normal !important !important;
+    margin-right:5px !important !important;
+    padding:2px 4px !important !important;
+    text-decoration:none !important !important;
+    white-space:nowrap !important !important;
+    margin-left: 5px !important;
+}
+
+
+
+a.cke_dialog_ui_button:focus,
+a.cke_dialog_ui_button:active
+{
+  border-color: none !important;
+}
+
+.cke_dialog_footer_buttons
+{
+  display: table !important; /* Haiku edit */
+}
+
+a.cke_dialog_ui_button
+{
+  background: #ECECEC !important;
+  border-color: #B3B3B3 !important;
+}
+
+.cke_dialog_footer_buttons span.cke_dialog_ui_button
+{
+  -moz-border-radius-bottomleft:3px !important;
+  -moz-border-radius-bottomright:3px !important;
+  -moz-border-radius-topleft:3px !important;
+  -moz-border-radius-topright:3px !important;
+  -webkit-border-bottom-left-radius: 3px 3px !important;
+  -webkit-border-bottom-right-radius: 3px 3px !important;
+  -webkit-border-top-left-radius: 3px 3px !important;
+  -webkit-border-top-right-radius: 3px 3px !important;
+
+  color:#997755 !important;
+  font-size:14px !important;
+}
+
+
+a.cke_dialog_ui_button_ok, a.cke_dialog_ui_button_ok span
+{
+  text-shadow: none !important;
+}
+
+.cke_dialog_contents .haikudialog_option {
+    padding: 10px 5px !important;
+}
+
+
+
+
+
+
+
+/***** STYLES TO COMFIRM STILL NEEDED BELOW ******/
+
+
+
+
+
+
+
+.cke_dialog_contents #ckeditor_image_properties table th{
+    text-align:left !important;
+ }
+
+.cke_dialog_contents .ckeditor_image_thumb {
+    border: 1px solid #779988 !important;
+    vertical-align: top !important;
+    padding:2px !important;
+    margin-top: 2px !important;
+    width:50px !important;
+    height:50px !important;
+}
+
+.cke_dialog_contents fieldset.collapsible legend a {
+    -moz-background-clip:border !important;
+    -moz-background-inline-policy:continuous !important;
+    -moz-background-origin:padding !important;
+    background:transparent url(/images/bullet_open.gif) no-repeat scroll 2px 4px !important;
+    font-weight:bold !important;
+    padding-left:14px !important;
+}
+
+.cke_dialog_contents fieldset.collapsed legend a {
+    -moz-background-clip:border !important;
+    -moz-background-inline-policy:continuous !important;
+    -moz-background-origin:padding !important;
+    background:transparent url(/images/bullet_closed.gif) no-repeat scroll 2px 4px !important;
+}
+
+
+/*Link dialog: select box for cms pages*/
+.cke_dialog_contents select#ckeditor_link_cms_page_id option:first-child {
+  background-color: inherit !important;
+}
+
+.cke_dialog_contents select#ckeditor_link_cms_page_id option {
+  /*background-color: #DDEECC !important;*/
+}
+
+.cke_dialog_contents select#ckeditor_link_cms_page_id option.cms_page_status_0 {
+  /*background-color: #FFE1E1 !important;*/
+  background-color: #DEDEDE !important;
+}
+
+/*end*/
+
+/*Link dialog: existing file divs*/
+.cke_dialog_contents #link_file_fieldset div:first-child {
+  border-top: none !important;
+}
+
+.cke_dialog_contents #link_file_fieldset div {
+  border-top: 1px solid #DDDDDD !important;
+  padding: 4px !important;
+}
+
+
+/*image dialog */
+
+.ckeditor_caption_fieldset {
+  margin-top: 12px !important;
+  width:98% !important;
+}
+
+.cke_browser_ie .ckeditor_caption_fieldset {
+  width:93% !important;
+}
+/* end HAIKU EDIT */
