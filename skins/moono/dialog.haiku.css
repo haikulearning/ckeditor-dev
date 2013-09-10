@@ -13,7 +13,7 @@ a.cke_dialog_ui_button:active
   display: table !important; /* Haiku edit */
 }
 
-a.cke_dialog_ui_button
+a.cke_dialog_ui_button, a.cke_dialog_ui_button_ok
 {
   background: #ECECEC !important;
   border-color: #B3B3B3 !important;
