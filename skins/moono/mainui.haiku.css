@@ -1,0 +1,9 @@
+.cke_chrome
+{
+  border-width: 1px !important;
+}
+
+.cke_inner, .cke_contents
+{
+  float:none !important;
+}
