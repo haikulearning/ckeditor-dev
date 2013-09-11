@@ -516,7 +516,7 @@
 			return {
 				title: lang.title,
 				resizable: CKEDITOR.DIALOG_RESIZE_NONE,
-				minWidth: 350,
+				minWidth: 360,/* HAIKU EDIT */
 				minHeight: 170,
 				buttons: [
 					// Close button only.
