@@ -1,5 +1,5 @@
 ﻿/**
- * @license Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
@@ -96,7 +96,7 @@ CKEDITOR.dialog.add( 'link', function( editor ) {
 						return 'mailto:' +
 							String.fromCharCode.apply( String, protectedAddress.split( ',' ) ) +
 							( rest && unescapeSingleQuote( rest ) );
-					});
+					} );
 				}
 				// Protected email link as function call.
 				else if ( emailProtection ) {
@@ -118,7 +118,7 @@ CKEDITOR.dialog.add( 'link', function( editor ) {
 							}
 							email.address = [ email.name, email.domain ].join( '@' );
 						}
-					});
+					} );
 				}
 			}
 
@@ -166,7 +166,7 @@ CKEDITOR.dialog.add( 'link', function( editor ) {
 						var featureMatch;
 						while ( ( featureMatch = popupFeaturesRegex.exec( onclickMatch[ 2 ] ) ) ) {
 							// Some values should remain numbers (#7300)
-							if ( ( featureMatch[ 2 ] == 'yes' || featureMatch[ 2 ] == '1' ) && !( featureMatch[ 1 ] in { height:1,width:1,top:1,left:1 } ) )
+							if ( ( featureMatch[ 2 ] == 'yes' || featureMatch[ 2 ] == '1' ) && !( featureMatch[ 1 ] in { height: 1, width: 1, top: 1, left: 1 } ) )
 								retval.target[ featureMatch[ 1 ] ] = true;
 							else if ( isFinite( featureMatch[ 2 ] ) )
 								retval.target[ featureMatch[ 1 ] ] = featureMatch[ 2 ];
@@ -204,32 +204,7 @@ CKEDITOR.dialog.add( 'link', function( editor ) {
 			}
 
 			// Find out whether we have any anchors in the editor.
-			var anchors = retval.anchors = [],
-				i, count, item;
-
-			// For some browsers we set contenteditable="false" on anchors, making document.anchors not to include them, so we must traverse the links manually (#7893).
-			if ( CKEDITOR.plugins.link.emptyAnchorFix ) {
-				var links = editor.document.getElementsByTag( 'a' );
-				for ( i = 0, count = links.count(); i < count; i++ ) {
-					item = links.getItem( i );
-					if ( item.data( 'cke-saved-name' ) || item.hasAttribute( 'name' ) )
-						anchors.push({ name: item.data( 'cke-saved-name' ) || item.getAttribute( 'name' ), id: item.getAttribute( 'id' ) } );
-				}
-			} else {
-				var anchorList = new CKEDITOR.dom.nodeList( editor.document.$.anchors );
-				for ( i = 0, count = anchorList.count(); i < count; i++ ) {
-					item = anchorList.getItem( i );
-					anchors[ i ] = { name: item.getAttribute( 'name' ), id: item.getAttribute( 'id' ) };
-				}
-			}
-
-			if ( CKEDITOR.plugins.link.fakeAnchor ) {
-				var imgs = editor.document.getElementsByTag( 'img' );
-				for ( i = 0, count = imgs.count(); i < count; i++ ) {
-					if ( ( item = CKEDITOR.plugins.link.tryRestoreFakeAnchor( editor, imgs.getItem( i ) ) ) )
-						anchors.push({ name: item.getAttribute( 'name' ), id: item.getAttribute( 'id' ) } );
-				}
-			}
+			retval.anchors = CKEDITOR.plugins.link.getEditorAnchors( editor );
 
 			// Record down the selected element in the dialog.
 			this._.selectedElement = element;
@@ -283,8 +258,8 @@ CKEDITOR.dialog.add( 'link', function( editor ) {
 			compiledProtectionFunction.params = [];
 			params.replace( /[^,\s]+/g, function( param ) {
 				compiledProtectionFunction.params.push( param );
-			});
-		});
+			} );
+		} );
 	}
 
 	function protectEmailLinkAsFunction( email ) {
@@ -419,7 +394,7 @@ CKEDITOR.dialog.add( 'link', function( editor ) {
 							if ( dialog.getContentElement( 'info', 'linkType' ) && dialog.getValueOf( 'info', 'linkType' ) != 'url' )
 								return true;
 
-							if ( (/javascript\:/).test( this.getValue() ) ) {
+							if ( ( /javascript\:/ ).test( this.getValue() ) ) {
 								alert( commonLang.invalidValue );
 								return false;
 							}
@@ -1057,9 +1032,12 @@ CKEDITOR.dialog.add( 'link', function( editor ) {
 				element = null;
 
 			// Fill in all the relevant fields if there's already one link selected.
-			if ( ( element = plugin.getSelectedLink( editor ) ) && element.hasAttribute( 'href' ) )
-				selection.selectElement( element );
-			else
+			if ( ( element = plugin.getSelectedLink( editor ) ) && element.hasAttribute( 'href' ) ) {
+				// Don't change selection if some element is already selected.
+				// For example - don't destroy fake selection.
+				if ( !selection.getSelectedElement() )
+					selection.selectElement( element );
+			} else
 				element = null;
 
 			this.setupContent( parseLink.apply( this, [ editor, element ] ) );
@@ -1202,7 +1180,7 @@ CKEDITOR.dialog.add( 'link', function( editor ) {
 			attributes.href = attributes[ 'data-cke-saved-href' ];
 
 			if ( !this._.selectedElement ) {
-				var range = selection.getRanges( 1 )[ 0 ];
+				var range = selection.getRanges()[ 0 ];
 
 				// Use link URL as text with a collapsed cursor.
 				if ( range.collapsed ) {
@@ -1213,7 +1191,7 @@ CKEDITOR.dialog.add( 'link', function( editor ) {
 				}
 
 				// Apply style.
-				var style = new CKEDITOR.style({ element: 'a', attributes: attributes } );
+				var style = new CKEDITOR.style( { element: 'a', attributes: attributes } );
 				style.type = CKEDITOR.STYLE_INLINE; // need to override... dunno why.
 				style.applyToRange( range );
 				range.select();
@@ -1233,9 +1211,11 @@ CKEDITOR.dialog.add( 'link', function( editor ) {
 				if ( href == textView || data.type == 'email' && textView.indexOf( '@' ) != -1 ) {
 					// Short mailto link text view (#5736).
 					element.setHtml( data.type == 'email' ? data.email.address : attributes[ 'data-cke-saved-href' ] );
+
+					// We changed the content, so need to select it again.
+					selection.selectElement( element );
 				}
 
-				selection.selectElement( element );
 				delete this._.selectedElement;
 			}
 		},
@@ -1256,15 +1236,15 @@ CKEDITOR.dialog.add( 'link', function( editor ) {
 			}
 		}
 	};
-});
+} );
 
 /**
  * The e-mail address anti-spam protection option. The protection will be
  * applied when creating or modifying e-mail links through the editor interface.
  *
- * Two methods of protection can be choosed:
+ * Two methods of protection can be chosen:
  *
- * 1. The e-mail parts (name, domain and any other query string) are
+ * 1. The e-mail parts (name, domain, and any other query string) are
  *     assembled into a function call pattern. Such function must be
  *     provided by the developer in the pages that will use the contents.
  * 2. Only the e-mail address is obfuscated into a special string that

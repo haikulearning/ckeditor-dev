@@ -1,5 +1,5 @@
 ﻿/**
- * @license Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
@@ -8,7 +8,7 @@
  *		utility functions.
  */
 
-(function() {
+( function() {
 	var functions = [],
 		cssVendorPrefix =
 			CKEDITOR.env.gecko ? '-moz-' :
@@ -19,7 +19,7 @@
 
 	CKEDITOR.on( 'reset', function() {
 		functions = [];
-	});
+	} );
 
 	/**
 	 * Utility functions.
@@ -98,9 +98,8 @@
 			}
 
 			// "Static" types.
-			if ( obj === null || ( typeof( obj ) != 'object' ) || ( obj instanceof String ) || ( obj instanceof Number ) || ( obj instanceof Boolean ) || ( obj instanceof Date ) || ( obj instanceof RegExp ) ) {
+			if ( obj === null || ( typeof( obj ) != 'object' ) || ( obj instanceof String ) || ( obj instanceof Number ) || ( obj instanceof Boolean ) || ( obj instanceof Date ) || ( obj instanceof RegExp ) )
 				return obj;
-			}
 
 			// Objects.
 			clone = new obj.constructor();
@@ -117,10 +116,11 @@
 		 * Turns the first letter of a string to upper-case.
 		 *
 		 * @param {String} str
+		 * @param {Boolean} [keepCase] Keep the case of 2nd to last letter.
 		 * @returns {String}
 		 */
-		capitalize: function( str ) {
-			return str.charAt( 0 ).toUpperCase() + str.substring( 1 ).toLowerCase();
+		capitalize: function( str, keepCase ) {
+			return str.charAt( 0 ).toUpperCase() + ( keepCase ? str.slice( 1 ) : str.slice( 1 ).toLowerCase() );
 		},
 
 		/**
@@ -223,7 +223,7 @@
 		 * @returns {Boolean} `true` if the object is an Array, otherwise `false`.
 		 */
 		isArray: function( object ) {
-			return ( !!object && object instanceof Array );
+			return Object.prototype.toString.call( object ) == '[object Array]';
 		},
 
 		/**
@@ -273,7 +273,7 @@
 		 * @param {String} cssName The CSS property name.
 		 * @returns {String} The transformed name.
 		 */
-		cssStyleToDomStyle: (function() {
+		cssStyleToDomStyle: ( function() {
 			var test = document.createElement( 'div' ).style;
 
 			var cssFloat = ( typeof test.cssFloat != 'undefined' ) ? 'cssFloat' : ( typeof test.styleFloat != 'undefined' ) ? 'styleFloat' : 'float';
@@ -284,10 +284,10 @@
 				else {
 					return cssName.replace( /-./g, function( match ) {
 						return match.substr( 1 ).toUpperCase();
-					});
+					} );
 				}
 			};
-		})(),
+		} )(),
 
 		/**
 		 * Builds a HTML snippet from a set of `<style>/<link>`.
@@ -339,6 +339,20 @@
 		},
 
 		/**
+		 * Replace HTML entities previously encoded by
+		 * {@link #htmlEncodeAttr htmlEncodeAttr} back to their plain character
+		 * representation.
+		 *
+		 *		alert( CKEDITOR.tools.htmlDecodeAttr( '&gt;a &quot; b &lt;' ); // '<a " b >'
+		 *
+		 * @param {String} text The text to be decoded.
+		 * @returns {String} The decoded text.
+		 */
+		htmlDecodeAttr: function( text ) {
+			return text.replace( /&quot;/g, '"' ).replace( /&lt;/g, '<' ).replace( /&gt;/g, '>' );
+		},
+
+		/**
 		 * Gets a unique number for this CKEDITOR execution session. It returns
 		 * consecutive numbers starting from 1.
 		 *
@@ -348,12 +362,12 @@
 		 * @method
 		 * @returns {Number} A unique number.
 		 */
-		getNextNumber: (function() {
+		getNextNumber: ( function() {
 			var last = 0;
 			return function() {
 				return ++last;
 			};
-		})(),
+		} )(),
 
 		/**
 		 * Gets a unique ID for CKEditor interface elements. It returns a
@@ -438,13 +452,13 @@
 		 * @param {String} str The text from which the spaces will be removed.
 		 * @returns {String} The modified string without the boundary spaces.
 		 */
-		trim: (function() {
+		trim: ( function() {
 			// We are not using \s because we don't want "non-breaking spaces" to be caught.
 			var trimRegex = /(?:^[ \t\n\r]+)|(?:[ \t\n\r]+$)/g;
 			return function( str ) {
 				return str.replace( trimRegex, '' );
 			};
-		})(),
+		} )(),
 
 		/**
 		 * Removes spaces from the start (left) of a string. The following
@@ -456,13 +470,13 @@
 		 * @param {String} str The text from which the spaces will be removed.
 		 * @returns {String} The modified string excluding the removed spaces.
 		 */
-		ltrim: (function() {
+		ltrim: ( function() {
 			// We are not using \s because we don't want "non-breaking spaces" to be caught.
 			var trimRegex = /^[ \t\n\r]+/g;
 			return function( str ) {
 				return str.replace( trimRegex, '' );
 			};
-		})(),
+		} )(),
 
 		/**
 		 * Removes spaces from the end (right) of a string. The following
@@ -474,13 +488,13 @@
 		 * @param {String} str The text from which spaces will be removed.
 		 * @returns {String} The modified string excluding the removed spaces.
 		 */
-		rtrim: (function() {
+		rtrim: ( function() {
 			// We are not using \s because we don't want "non-breaking spaces" to be caught.
 			var trimRegex = /[ \t\n\r]+$/g;
 			return function( str ) {
 				return str.replace( trimRegex, '' );
 			};
-		})(),
+		} )(),
 
 		/**
 		 * Returns the index of an element in an array.
@@ -502,9 +516,9 @@
 					if ( value( array[ i ] ) )
 						return i;
 				}
-			} else if ( array.indexOf ) {
+			} else if ( array.indexOf )
 				return array.indexOf( value );
-			} else {
+			else {
 				for ( i = 0, len = array.length; i < len; i++ ) {
 					if ( array[ i ] === value )
 						return i;
@@ -582,7 +596,7 @@
 			// Create the constructor, if not present in the definition.
 			!$ && ( $ = function() {
 				baseClass && this.base.apply( this, arguments );
-			});
+			} );
 
 			if ( privates ) {
 				var originalConstructor = $;
@@ -643,7 +657,7 @@
 		addFunction: function( fn, scope ) {
 			return functions.push( function() {
 				return fn.apply( scope || this, arguments );
-			}) - 1;
+			} ) - 1;
 		},
 
 		/**
@@ -688,7 +702,7 @@
 		 * @method
 		 * @param {Number/String/Boolean} length
 		 */
-		cssLength: (function() {
+		cssLength: ( function() {
 			var pixelRegex = /^-?\d+\.?\d*px$/,
 				lengthTrimmed;
 
@@ -700,7 +714,7 @@
 				else
 					return length || '';
 			};
-		})(),
+		} )(),
 
 		/**
 		 * Converts the specified CSS length value to the calculated pixel length inside this page.
@@ -710,7 +724,7 @@
 		 * @method
 		 * @param {String} cssLength CSS length value.
 		 */
-		convertToPx: (function() {
+		convertToPx: ( function() {
 			var calculator;
 
 			return function( cssLength ) {
@@ -728,7 +742,7 @@
 
 				return cssLength;
 			};
-		})(),
+		} )(),
 
 		/**
 		 * String specified by `str` repeats `times` times.
@@ -826,7 +840,7 @@
 				for ( var i = 0; i < 3; i++ )
 					color[ i ] = ( '0' + parseInt( color[ i ], 10 ).toString( 16 ) ).slice( -2 );
 				return '#' + color.join( '' );
-			});
+			} );
 		},
 
 		/**
@@ -864,7 +878,7 @@
 				}
 
 				retval[ name ] = value;
-			});
+			} );
 			return retval;
 		},
 
@@ -914,9 +928,9 @@
 				return false;
 
 			for ( name in left ) {
-				if ( left[ name ] != right[ name ] ) {
+				if ( left[ name ] != right[ name ] )
 					return false;
-				}
+
 			}
 
 			if ( !onlyLeft ) {
@@ -985,7 +999,7 @@
 		fixDomain: function() {
 			var domain;
 
-			while( 1 ) {
+			while ( 1 ) {
 				try {
 					// Try to access the parent document. It throws
 					// "access denied" if restricted by the "Same Origin" policy.
@@ -1079,8 +1093,31 @@
 					scheduled = lastOutput = 0;
 				}
 			};
+		},
+
+		/**
+		 * Enable HTML5 elements for older browsers (IE8) in passed document.
+		 *
+		 * In IE8 this method can be also executed on document fragment.
+		 *
+		 * **Note:** This method has to be used in the `<head>` section of the document.
+		 *
+		 * @since 4.3
+		 * @param {Object} doc Native `Document` or `DocumentFragment` in which elements will be enabled.
+		 * @param {Boolean} [withAppend] Whether to append created elements to the `doc`.
+		 */
+		enableHtml5Elements: function( doc, withAppend ) {
+			var els = 'abbr,article,aside,audio,bdi,canvas,data,datalist,details,figcaption,figure,footer,header,hgroup,mark,meter,nav,output,progress,section,summary,time,video'.split( ',' ),
+				i = els.length,
+				el;
+
+			while ( i-- ) {
+				el = doc.createElement( els[ i ] );
+				if ( withAppend )
+					doc.appendChild( el );
+			}
 		}
 	};
-})();
+} )();
 
 // PACKAGER_RENAME( CKEDITOR.tools )
